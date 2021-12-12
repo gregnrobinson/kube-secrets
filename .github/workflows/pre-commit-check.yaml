@@ -13,3 +13,6 @@ jobs:
     - uses: terraform-linters/setup-tflint@v1
       with:
         tflint_version: latest
+    - uses: pre-commit/action@v2.0.3
+      with:
+        extra_args: flake8 --all-files

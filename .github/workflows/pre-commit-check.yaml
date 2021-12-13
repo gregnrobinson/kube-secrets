@@ -1,9 +1,10 @@
 name: pre-commit
+
 on:
   pull_request:
-  workflow_dispatch:
   push:
     branches: [main]
+
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
@@ -14,8 +15,6 @@ jobs:
       with:
         tflint_version: latest
     - uses: pre-commit/action@v2.0.3
-      with:
-        extra_args: flake8 --all-files
   slack-workflow-status:
     if: always()
     name: Post Workflow Status To Slack
@@ -26,6 +25,7 @@ jobs:
       - name: Slack Workflow Notification
         uses: Gamesight/slack-workflow-status@master
         with:
+          # Required Input
           repo_token: ${{secrets.GITHUB_TOKEN}}
           slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
           name: 'Github Workflows'
